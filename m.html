@@ -1,0 +1,15 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex">
+<title>Move your Sweb</title><link rel="stylesheet" href="sweb.css"></head>
+<body><main><div class="card" style="text-align:center"><img src="icon.png" alt="Sweb" style="width:72px;height:72px;border-radius:18px">
+<h1>Move your Sweb</h1><p class="muted">Open this on your new phone or tablet to restore your sites, folders and settings.</p>
+<a class="btn" id="open" href="#">Open in Sweb</a><a class="btn alt" id="get" href="#">Get Sweb for iPhone</a>
+<p class="muted" style="font-size:14px">Your setup is encrypted on your old phone. The key is in this link after the #, which browsers never send to any server.</p></div></main>
+<script src="sweb.js"></script>
+<script>
+// Encrypted move: m.html#<id>.<key>. Offline fallback: m.html#d=<setup>. Both stay in the fragment, which is never sent to this site.
+var m=location.hash.slice(1),d=m.indexOf('d=')===0?m.slice(2):'';
+var path=/^[A-Za-z0-9_-]+\.[A-Za-z0-9_-]+$/.test(m)?'move?m='+m:d?'move?d='+encodeURIComponent(d):'';
+document.getElementById('get').href=APP_STORE;
+document.getElementById('open').onclick=function(e){e.preventDefault();if(path)openApp(path);};
+if(path)setTimeout(function(){openApp(path);},300);
+</script></body></html>

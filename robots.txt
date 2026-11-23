@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://itaisigler-a11y.github.io/petal-browser-site/sitemap.xml
