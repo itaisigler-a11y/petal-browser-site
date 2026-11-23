@@ -47,6 +47,6 @@ for (const f of readdirSync('packs')) {
   else kept.push(id);
 }
 for (const p of seen.values()) writeFileSync(`packs/${p.id}.html`, page(p));
-const urls = ['', 'packs.html', 'privacy.html', 'support.html', ...[...seen.keys(), ...kept].map((id) => `packs/${id}.html`)];
+const urls = ['', 'packs.html', 'folders.html', 'privacy.html', 'support.html', ...[...seen.keys(), ...kept].map((id) => `packs/${id}.html`)];
 writeFileSync('sitemap.xml', `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.map((u) => `  <url><loc>${SITE}/${u}</loc></url>`).join('\n')}\n</urlset>\n`);
 console.log(`Prerendered ${seen.size} packs.`);
