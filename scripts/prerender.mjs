@@ -36,8 +36,17 @@ export function page(p) {
 }
 
 mkdirSync('packs', { recursive: true });
-for (const f of readdirSync('packs')) if (f.endsWith('.html') && !seen.has(f.slice(0, -5))) rmSync(`packs/${f}`);
+const kept = [];
+// Ranked lists are not a full inventory: keep a page that dropped out of them unless the pack itself is gone or unlisted.
+for (const f of readdirSync('packs')) {
+  const id = f.slice(0, -5);
+  if (!f.endsWith('.html') || seen.has(id)) continue;
+  const r = await fetch(`${API}/v1/setups/${encodeURIComponent(id)}`);
+  const s = r.ok ? await r.json() : null;
+  if (r.status === 404 || r.status === 410 || (s && (s.kind !== 'pack' || !s.listed))) rmSync(`packs/${f}`);
+  else kept.push(id);
+}
 for (const p of seen.values()) writeFileSync(`packs/${p.id}.html`, page(p));
-const urls = ['', 'packs.html', 'privacy.html', 'support.html', ...[...seen.keys()].map((id) => `packs/${id}.html`)];
+const urls = ['', 'packs.html', 'privacy.html', 'support.html', ...[...seen.keys(), ...kept].map((id) => `packs/${id}.html`)];
 writeFileSync('sitemap.xml', `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.map((u) => `  <url><loc>${SITE}/${u}</loc></url>`).join('\n')}\n</urlset>\n`);
 console.log(`Prerendered ${seen.size} packs.`);

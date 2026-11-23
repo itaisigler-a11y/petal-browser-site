@@ -5,6 +5,7 @@ on:
   workflow_dispatch:
 permissions:
   contents: write
+  pages: write
 jobs:
   prerender:
     runs-on: ubuntu-latest
@@ -22,3 +23,7 @@ jobs:
           git diff --cached --quiet && exit 0
           git -c user.name=sweb-bot -c user.email=actions@users.noreply.github.com commit -m "Prerender pack pages"
           git push
+          # Pushes made with GITHUB_TOKEN don't start a Pages build, so request one.
+          gh api -X POST repos/${{ github.repository }}/pages/builds
+        env:
+          GH_TOKEN: ${{ github.token }}

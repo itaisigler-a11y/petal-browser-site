@@ -6,8 +6,8 @@
 <p class="muted" style="font-size:14px">Your setup is encrypted on your old phone. The key is in this link after the #, which browsers never send to any server.</p></div></main>
 <script src="sweb.js"></script>
 <script>
-// Encrypted move: m.html#<id>.<key>. Offline fallback: m.html?d=<setup>.
-var m=location.hash.slice(1),d=new URLSearchParams(location.search).get('d')||'';
+// Encrypted move: m.html#<id>.<key>. Offline fallback: m.html#d=<setup>. Both stay in the fragment, which is never sent to this site.
+var m=location.hash.slice(1),d=m.indexOf('d=')===0?m.slice(2):'';
 var path=/^[A-Za-z0-9_-]+\.[A-Za-z0-9_-]+$/.test(m)?'move?m='+m:d?'move?d='+encodeURIComponent(d):'';
 document.getElementById('get').href=APP_STORE;
 document.getElementById('open').onclick=function(e){e.preventDefault();if(path)openApp(path);};
