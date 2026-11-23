@@ -9,7 +9,6 @@ permissions:
 jobs:
   prerender:
     runs-on: ubuntu-latest
-    if: vars.SWEB_API != ''
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -17,7 +16,7 @@ jobs:
           node-version: 22
       - run: node scripts/prerender.mjs
         env:
-          SWEB_API: ${{ vars.SWEB_API }}
+          SWEB_API: ${{ vars.SWEB_API || 'https://sweb-sync.sweb-app.workers.dev' }}
       - run: |
           git add packs sitemap.xml
           git diff --cached --quiet && exit 0

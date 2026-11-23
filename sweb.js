@@ -1,5 +1,5 @@
 // Shared by the pack, move and helper pages. Set SWEB_API to the sync server (no trailing slash).
-var SWEB_API = '';
+var SWEB_API = 'https://sweb-sync.sweb-app.workers.dev';
 var APP_STORE = 'https://apps.apple.com/app/id6836605431';
 function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
 function host(u){try{return new URL(u).hostname.replace(/^www\./,'');}catch(e){return u;}}
