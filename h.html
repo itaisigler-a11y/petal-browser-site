@@ -1,0 +1,12 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex">
+<title>Help keep a Sweb up to date</title><link rel="stylesheet" href="sweb.css"></head>
+<body><main><div class="card" style="text-align:center"><img src="icon.png" alt="Sweb" style="width:72px;height:72px;border-radius:18px">
+<h1>You're invited to help</h1><p class="muted">Someone wants your help keeping a family member's Sweb right. Your edits reach their phone as changes they can accept.</p>
+<a class="btn" id="open" href="#">Open in Sweb</a><a class="btn alt" id="get" href="#">Get Sweb for iPhone</a></div></main>
+<script src="sweb.js"></script>
+<script>
+var c=location.hash.slice(1),ok=/^[A-Za-z0-9_-]{8,64}$/.test(c);
+document.getElementById('get').href=APP_STORE;
+document.getElementById('open').onclick=function(e){e.preventDefault();if(ok)openApp('help?c='+c);};
+if(ok)setTimeout(function(){openApp('help?c='+c);},300);
+</script></body></html>

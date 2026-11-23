@@ -1,0 +1,24 @@
+name: Prerender pack pages
+on:
+  schedule:
+    - cron: '23 */6 * * *'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  prerender:
+    runs-on: ubuntu-latest
+    if: vars.SWEB_API != ''
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: node scripts/prerender.mjs
+        env:
+          SWEB_API: ${{ vars.SWEB_API }}
+      - run: |
+          git add packs sitemap.xml
+          git diff --cached --quiet && exit 0
+          git -c user.name=sweb-bot -c user.email=actions@users.noreply.github.com commit -m "Prerender pack pages"
+          git push

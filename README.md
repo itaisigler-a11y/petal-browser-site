@@ -1,2 +1,11 @@
 # petal-browser-site
 Public support and privacy policy pages for Sweb (GitHub Pages)
+
+## Living setups pages
+
+- `packs.html`: public pack library (search, popular/new), loaded from the sync server.
+- `p.html?id=<id>`: live pack preview; "Add to Sweb" opens `petal://share?i=<id>` (install + Follow).
+- `m.html#<id>.<key>`: Move my Sweb. The decryption key stays in the fragment. `m.html?d=` is the offline fallback.
+- `h.html#<code>`: helper invite for a family Sweb.
+- `s.html?d=`: the static share link; still works when the server is unreachable.
+- `scripts/prerender.mjs` + `.github/workflows/prerender.yml`: writes `packs/<id>.html` and `sitemap.xml` every 6 hours once the `SWEB_API` repo variable is set. Set the same URL in `sweb.js`.
