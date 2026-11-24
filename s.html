@@ -1,9 +1,9 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Someone shared their Sweb with you</title>
 <style>:root{color-scheme:light dark}body{margin:0;font:17px/1.5 -apple-system,system-ui,sans-serif;background:#FAFAF9;color:#18181B;display:grid;place-items:center;min-height:100vh}@media(prefers-color-scheme:dark){body{background:#0F0F10;color:#F4F4F5}.card{background:#18181B!important;border-color:#27272A!important}}
 .card{max-width:380px;margin:24px;padding:32px 28px;border:1px solid #E4E4E7;border-radius:20px;background:#fff;text-align:center}img{width:72px;height:72px;border-radius:18px}h1{font-size:22px;margin:16px 0 6px}p{margin:0 0 22px;color:#71717A}
-a.btn{display:block;padding:14px;border-radius:12px;background:#7C3AED;color:#fff;text-decoration:none;font-weight:600;margin-top:10px}a.alt{background:transparent;color:#7C3AED;border:1px solid #7C3AED}</style></head>
+a.btn{display:block;padding:14px;border-radius:12px;background:#7C3AED;color:#fff;text-decoration:none;font-weight:600;margin-top:10px}a.alt{background:transparent;color:#7C3AED;border:1px solid #7C3AED}.note{margin:16px 0 0;font-size:15px}</style></head>
 <body><div class="card"><img src="icon.png" alt="Sweb"><h1 id="t">Someone shared their Sweb with you</h1><p id="s">Their favorite sites, folders and look, ready in one tap.</p>
-<a class="btn" id="open" href="#">Open in Sweb</a><a class="btn alt" href="https://apps.apple.com/app/id6836605431">Get Sweb for iPhone</a></div>
+<a class="btn" id="open" href="#">Open setup</a><a class="btn alt" href="https://apps.apple.com/app/id6836605431">Get Sweb for iPhone</a><p class="note">After installing, return here and tap Open setup.</p></div>
 <script>
 var d=new URLSearchParams(location.search).get('d')||'';
 document.getElementById('open').href='petal://share?d='+encodeURIComponent(d);
